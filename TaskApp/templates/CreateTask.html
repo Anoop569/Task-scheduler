@@ -1,0 +1,108 @@
+{% load static %}
+<html>
+<head>
+<title>Task Scheduler</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="{% static 'style.css' %}" rel="stylesheet" type="text/css" />
+<script language="javascript">
+	function validate(formObj)
+	{
+	if(formObj.t1.value.length==0)
+	{
+	alert("Please Enter task title");
+	formObj.t1.focus();
+	return false;
+	}
+
+	if(formObj.t2.value.length==0)
+	{
+	alert("Please Enter task description");
+	formObj.t2.focus();
+	return false;
+	}
+	
+	if(formObj.t3.value.length==0)
+	{
+	alert("Please choose due adte");
+	formObj.t3.focus();
+	return false;
+	}
+	
+	if(formObj.t5.value.length==0)
+	{
+	alert("Please Enter tags");
+	formObj.t5.focus();
+	return false;
+	}
+	
+	return true;
+	}
+	</script>
+	<script language="javascript" type="text/javascript" src="{% static 'datetimepicker.js' %}">
+</script>
+<style>
+body {
+  background-image: url("{% static 'images/back.jpg' %}");
+}
+</style>
+</head>
+<body>
+<div class="main">
+  <div class="main_resize">
+    <div class="header">
+      <div class="logo">
+        <h1><span>Task Scheduler System</span><small></small></h1>
+      </div>
+    </div>
+    <div class="content">
+      <div class="content_bg">
+        <div class="menu_nav">
+        <ul>
+      
+      <li><a href="{% url 'ChangePassword' %}">Reset Password</a></li>
+	  <li><a href="{% url 'CreateTask' %}">Create Task</a></li>
+	  <li><a href="{% url 'ViewTask' %}">View/Edit/Delete Task</a></li>	 
+	   <li><a href="{% url 'MarkComplete' %}">Mark Complete</a></li>	 
+	   <li><a href="{% url 'NotificationTime' %}">Set Notification Time</a></li>
+	   <li><a href="{% url 'index' %}">Logout</a></li>
+   </ul>
+        </div>
+        <div class="hbg"><img src="{% static 'images/header_images.jpg' %}" width="1020" height="286" alt="" /></div>
+      				<center>
+<form name="f1" method="post" action={% url 'CreateTaskAction' %} onsubmit="return validate(this);">
+{% csrf_token %}<br/>
+   <h2><b>Create Task Screen</b></h2>
+   
+	<font size="3" color="red"><center>{{ data|safe }}</center></font>
+						
+						<table align="center" width="30%" >
+			 <tr><td><font size='' color="black">Task&nbsp;Title</b></td>
+			 <td><input type="text" name="t1" style="font-family: Comic Sans MS" size="50"></td></tr>
+
+			 <tr><td><font size='' color="black">Description</b></td><td><input type="text" name="t2" style="font-family: Comic Sans MS" size="80"/></td></tr>
+         
+		  <tr><td><font size='' color="black">Due&nbsp;Date&nbsp;Time</b></td><td><input name="t3" type="Text" id="demo1" maxlength="25" size="20" class="c2" ><a href="javascript:NewCal('demo1','ddmmyyyy',true,24)"><img src="{% static 'cal.gif' %}" width="16" height="16" border="0" alt="Pick a date"></a>
+	  		<span class="descriptions"></span></td></tr>
+
+		
+			<tr><td><font size='' color="black">Priority</b></td>
+			<td><select name="t4">
+			<option value="High">High</option>
+			<option value="Medium">Medium</option>
+			<option value="Low">Low</option>
+			</select>
+			</td></td></tr>
+		   
+
+          <tr><td><font size='' color="black">Tags</b></td><td><input name="t5" type="Text" size="70"></td></td></tr>
+
+			
+			<tr><td></td><td><input type="submit" value="Submit"></td>
+			</table><br/><br/><br/><br/><br/>
+				</div>	
+					
+				</div>
+				
+					
+	</body>
+</html>
